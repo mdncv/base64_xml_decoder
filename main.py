@@ -34,9 +34,8 @@ def save_xml_to_file(xml_text):
 def main():
     decoded_string = decode_base64_to_windows1251(input('Enter the Base64-encoded string: '))
     print(decoded_string)
-    pretty_string = make_xml_pretty(decoded_string) if input('Make pretty? y/N: ').lower() == 'y' else decoded_string
-    print(pretty_string)
-    save_xml_to_file(pretty_string) if input('Save file? y/N: ').lower() == 'y' else None
+    print(make_xml_pretty(decoded_string)) if input('Make pretty? y/N: ').lower() == 'y' else None
+    save_xml_to_file(decoded_string) if input('Save file? y/N: ').lower() == 'y' else None
 
 
 if __name__ == '__main__':
