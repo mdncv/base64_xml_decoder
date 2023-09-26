@@ -11,18 +11,21 @@ def detect_encoding(base64_string):
     if b'<?xml' not in buffer:
         return 'utf-8'
 
-    encoding_start = buffer.find(b'encoding=')
+    encoding_declaration_start = buffer.find(b'encoding')
+    if encoding_declaration_start == -1:
+        return 'utf-8'
 
+    encoding_start = buffer.find(b'"', encoding_declaration_start)
     if encoding_start == -1:
         return 'utf-8'
 
-    encoding_start += 10
+    encoding_start += 1
     encoding_end = buffer.find(b'"', encoding_start)
 
     if encoding_end == -1:
         return 'utf-8'
 
-    return buffer[encoding_start:encoding_end].decode("utf-8")
+    return buffer[encoding_start:encoding_end].decode('utf-8')
 
 
 def decode_base64(base64_string, encoding):
